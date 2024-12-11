@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f7f8fa;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    /* Main Container */
+    .container {
+      width: 100%;
+      max-width: 700px;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 50px;
+      flex: 1;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #444;
+      font-weight: 600;
+    }
+
+    /* Form Container */
+    .form-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    input, select, button {
+      padding: 12px 16px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      width: 48%;
+    }
+
+    input:focus, select:focus, button:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    /* Button Styles */
+    button {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Table Styles */
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      font-weight: 500;
+    }
+
+    td {
+      border-bottom: 1px solid #f4f4f4;
+    }
+
+    .actions button {
+      background-color: #dc3545;
+      color: #fff;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .actions button:hover {
+      background-color: #c82333;
+    }
+
+    /* Footer Styles */
+    .footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+      margin-top: 40px;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .footer p {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer .social-links a {
+      margin: 0 12px;
+      font-size: 1.1rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin-top: 30px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .form-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      input, select, button {
+        width: 100%;
+      }
+
+      .actions button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .form-container {
+        gap: 8px;
+      }
+
+      .footer p {
+        font-size: 0.8rem;
+      }
+
+      .footer .social-links a {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+</head>
+<body>
+  <!-- Main Container -->
+  <div class="container">
+    <h1>Expense Tracker</h1>
+
+    <!-- Form for Adding Expenses -->
+    <div class="form-container">
+      <input type="text" id="description" placeholder="Description" />
+      <input type="number" id="amount" placeholder="Amount" />
+      <select id="category">
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Other">Other</option>
+      </select>
+      <button id="addExpenseBtn">Add Expense</button>
+    </div>
+
+    <!-- Expense Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="expenseTable">
+        <!-- Dynamic Expense Rows -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Simon Yatta. All rights reserved.</p>
+    <p>
+      Contact me: <a href="mailto:simonmoris32@gmail.com">simonmoris32@gmail.com</a>
+    </p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/simonmorris10" target="_blank">GitHub</a> |
+      <a href="https://www.upwork.com/freelancers/~01673bba5aa4c782a2?mp_source=share" target="_blank">Upwork</a>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // DOM Elements
+    const descriptionInput = document.getElementById('description');
+    const amountInput = document.getElementById('amount');
+    const categorySelect = document.getElementById('category');
+    const addExpenseBtn = document.getElementById('addExpenseBtn');
+    const expenseTable = document.getElementById('expenseTable');
+
+    // Load expenses from localStorage
+    let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+    // Function to render expenses
+    function renderExpenses() {
+      expenseTable.innerHTML = '';  // Clear the table body
+      expenses.forEach((expense, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${expense.description}</td>
+          <td>${expense.amount.toFixed(2)}</td>
+          <td>${expense.category}</td>
+          <td class="actions">
+            <button onclick="deleteExpense(${index})">Delete</button>
+          </td>
+        `;
+        expenseTable.appendChild(row);
+      });
+    }
+
+    // Function to add expense
+    function addExpense() {
+      const description = descriptionInput.value.trim();
+      const amount = parseFloat(amountInput.value);
+      const category = categorySelect.value;
+
+      if (description && !isNaN(amount) && amount > 0) {
+        const newExpense = { description, amount, category };
+        expenses.push(newExpense);
+        localStorage.setItem('expenses', JSON.stringify(expenses));
+        renderExpenses();
+
+        // Clear inputs after adding
+        descriptionInput.value = '';
+        amountInput.value = '';
+        categorySelect.value = 'Food';
+      } else {
+        alert('Please fill out all fields with valid data.');
+      }
+    }
+
+    // Function to delete expense
+    function deleteExpense(index) {
+      expenses.splice(index, 1);
+      localStorage.setItem('expenses', JSON.stringify(expenses));
+      renderExpenses();
+    }
+
+    // Event listener for the 'Add Expense' button
+    addExpenseBtn.addEventListener('click', addExpense);
+
+    // Initial render when the page loads
+    renderExpenses();
+  </script>
+</body>
+</html>
